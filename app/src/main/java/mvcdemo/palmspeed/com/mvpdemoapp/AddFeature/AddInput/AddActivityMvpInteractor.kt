@@ -1,29 +1,19 @@
 package mvcdemo.palmspeed.com.mvpdemoapp.AddFeature.AddInput
 
 import android.os.Handler
-import android.text.TextUtils
+import rx.Observable
 
-class AddActivityMvpInteractor(
-    private val mListener: AddActivityMvpContract.Interactor.addActivityMvpInteractorCallback) : AddActivityMvpContract.Interactor {
+class AddActivityMvpInteractor : AddActivityMvpContract.Interactor {
 
-  override fun addTwoNumbers(firstNumber: String, secondNumber: String) {
+  override fun addTwoNumbers(firstNumber: String, secondNumber: String): Observable<Any> {
 
-    if (TextUtils.isEmpty(firstNumber) || TextUtils.isEmpty(secondNumber)) {
-      mListener.displayError("Please enter valid value.")
-      return
+    return try {
+      val a = Integer.parseInt(firstNumber)
+      val b = Integer.parseInt(secondNumber)
+      val res = a + b
+      Observable.just(res)
+    } catch (e: Exception) {
+      Observable.error<Any>(Throwable("Something went wrong. Please check the inputs."))
     }
-
-    // Mock login. I'm creating a handler to delay the answer a couple of seconds
-    Handler().postDelayed({
-      try {
-        val a = Integer.parseInt(firstNumber)
-        val b = Integer.parseInt(secondNumber)
-        val res = a + b
-        mListener.calculatedAddition(res)
-      } catch (e: Exception) {
-        mListener.displayError("Something went wrong.")
-      }
-    }, 3000)
-
   }
 }

@@ -46,12 +46,12 @@ abstract class BaseActivity<V : MvpView, P : MvpPresenter<V>> : MvpActivity<V, P
   }
 
   private fun showSnackBar(message: String) {
-    // Code to display snackbar
+    // Code to display snack bar
     println("Message : " + message)
   }
 
   override fun onError(message: String) {
-    if (!message.isNullOrEmpty() && !message.isNullOrBlank()) {
+    if (!message.isEmpty() && !message.isBlank()) {
       showSnackBar(message)
     } else {
       showSnackBar(getString(R.string.some_error))
@@ -59,15 +59,7 @@ abstract class BaseActivity<V : MvpView, P : MvpPresenter<V>> : MvpActivity<V, P
   }
 
   override fun showMessage(message: String) {
-    if (message != null) {
-      Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-    } else {
-      Toast.makeText(this, getString(R.string.some_error), Toast.LENGTH_SHORT).show()
-    }
-  }
-
-  override fun onDestroy() {
-    super.onDestroy()
+    Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
   }
 
   override fun onFragmentAttached() {

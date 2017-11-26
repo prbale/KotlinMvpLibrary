@@ -2,6 +2,7 @@ package mvcdemo.palmspeed.com.mvpdemoapp.AddFeature.AddInput
 
 import mvclib.palmspeed.com.mvplibrary.MvpPresenter
 import mvclib.palmspeed.com.mvplibrary.MvpView
+import rx.Observable
 
 interface AddActivityMvpContract {
 
@@ -28,7 +29,7 @@ interface AddActivityMvpContract {
 
   interface Interactor {
 
-    fun addTwoNumbers(firstNumber: String, secondNumber: String)
+    fun addTwoNumbers(firstNumber: String, secondNumber: String) : Observable<Any>
 
     interface addActivityMvpInteractorCallback {
 
