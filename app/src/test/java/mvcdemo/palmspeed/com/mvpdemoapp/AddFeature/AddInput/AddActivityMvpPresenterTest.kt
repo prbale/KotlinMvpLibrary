@@ -35,7 +35,6 @@ class AddActivityMvpPresenterTest {
 
     // Get the reference for Interactor
     mAddActivityMvpInteractor = AddActivityMvpInteractor()
-
   }
 
   @After
@@ -43,24 +42,13 @@ class AddActivityMvpPresenterTest {
   }
 
   @Test
-  fun createPresenterRouterTest() {
-    // Given
-
-    // When
-    mAddActivityMvpPresenter?.start()
-
-    // Then
-    //verify(mAddActivityMvpView)?.setRouterToPresenter()
-    //verify(mAddActivityMvpView)?.init()
-  }
-
-  @Test
   fun additionTestSuccess() {
 
     // Given
     mAddActivityMvpPresenter?.start()
-    //verify(mAddActivityMvpView)?.setRouterToPresenter()
-    //verify(mAddActivityMvpView)?.init()
+    mAddActivityMvpPresenter?.attachView(mAddActivityMvpView as AddActivityMvpContract.View)
+    verify(mAddActivityMvpView)?.setRouterToPresenter()
+    verify(mAddActivityMvpView)?.init()
     val firstNumber = "10"
     val secondNumber = "20"
 
