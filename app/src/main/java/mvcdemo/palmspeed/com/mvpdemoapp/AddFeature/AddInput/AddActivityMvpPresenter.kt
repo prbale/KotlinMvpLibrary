@@ -1,6 +1,7 @@
 package mvcdemo.palmspeed.com.mvpdemoapp.AddFeature.AddInput
 
 import android.text.TextUtils
+import mvcdemo.palmspeed.com.mvpdemoapp.AddFeature.AddInput.AddActivityMvpContract.View
 import mvclib.palmspeed.com.mvplibrary.MvpBasePresenter
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
@@ -13,27 +14,22 @@ class AddActivityMvpPresenter : MvpBasePresenter<AddActivityMvpContract.View>(),
 
   override fun addTwoNumbers(firstNumber: String, secondNumber: String) {
 
-    if (isViewAttached) view?.displayProgress()
+    getView()?.displayProgress()
 
     if (TextUtils.isEmpty(firstNumber) || TextUtils.isEmpty(secondNumber)) {
-      view?.displayError("Please enter valid value.")
-      view?.dismissProgress()
+      getView()?.displayError("Please enter valid value.")
+      getView()?.dismissProgress()
       return
     }
 
     mAddActivityMvpInteractor.addTwoNumbers(firstNumber, secondNumber)
-         .subscribeOn(Schedulers.newThread())
-         .observeOn(AndroidSchedulers.mainThread())
-         .subscribe(
-             {
-               result -> calculatedAddition(result as Int)
-             },
-             {
-               errorMessage -> displayError(errorMessage.toString())
-             },
-             {
-             }
-         )
+       .subscribeOn(Schedulers.newThread())
+       .observeOn(AndroidSchedulers.mainThread())
+       .subscribe(
+           { result -> calculatedAddition(result as Int) },
+           { errorMessage -> displayError(errorMessage.toString()) },
+           {}
+       )
   }
 
   override fun setRouter(router: AddActivityMvpContract.Router) {
@@ -41,22 +37,21 @@ class AddActivityMvpPresenter : MvpBasePresenter<AddActivityMvpContract.View>(),
   }
 
   override fun calculatedAddition(res: Int) {
-    if (isViewAttached) {
-      view?.dismissProgress()
-      view?.displayAddition(res)
+      getView()?.dismissProgress()
+      getView()?.displayAddition(res)
       mRouter?.goToSuccessPage(res.toString())
-    }
   }
 
   override fun displayError(errMsg: String) {
-    if (isViewAttached) {
-      view?.dismissProgress()
-      view?.displayError(errMsg)
-    }
+      getView()?.dismissProgress()
+      getView()?.displayError(errMsg)
   }
 
   override fun start() {
-    view?.setRouterToPresenter()
-    view?.init()
+    getView()?.setRouterToPresenter()
+    getView()?.init()
   }
+
+  override fun getView(): View? = if (isViewAttached) view else null
+
 }
