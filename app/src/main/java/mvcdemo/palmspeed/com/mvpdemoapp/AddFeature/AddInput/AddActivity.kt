@@ -16,7 +16,7 @@ import mvcdemo.palmspeed.com.mvpdemoapp.Extensions.setFullScreen
 import mvcdemo.palmspeed.com.mvpdemoapp.Extensions.showSnackBarLong
 import mvcdemo.palmspeed.com.mvpdemoapp.R
 
-class AddActivity : BaseActivity<AddActivityMvpContract.View, AddActivityMvpContract.Presenter>(), AddActivityMvpContract.View, AddActivityMvpContract.Router {
+class AddActivity : BaseActivity<AddActivityMvpContract.View, AddActivityMvpContract.Presenter>(), AddActivityMvpContract.View {
 
   override fun createPresenter(): AddActivityMvpContract.Presenter = AddActivityMvpPresenter()
 
@@ -47,21 +47,20 @@ class AddActivity : BaseActivity<AddActivityMvpContract.View, AddActivityMvpCont
     }
   }
 
-
   override fun init() {
-    initFields()
+    // Do some initialization here.
+  }
+
+  // Clear CompositeDisposal if any.
+  override fun onStop() {
+    super.onStop()
+    presenter.stop()
   }
 
   override fun onDestroy() {
     super.onDestroy()
     presenter.detachView(false)
   }
-
-  private fun initFields() {
-    // Some initializations for this activity.
-  }
-
-  override fun displayAddition(res: Int) {}
 
   override fun displayError(errMsg: String) {
     mainActivityRootLayout.showSnackBarLong(errMsg)
@@ -70,8 +69,6 @@ class AddActivity : BaseActivity<AddActivityMvpContract.View, AddActivityMvpCont
   override fun displayProgress() = showLoading()
 
   override fun dismissProgress() = hideLoading()
-
-  override fun setRouterToPresenter() = presenter.setRouter(this)
 
   override fun goToErrorPage(errorMessage: String) {
     val intent = Intent(this, ErrorActivity::class.java).apply {

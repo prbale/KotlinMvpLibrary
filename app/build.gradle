@@ -2,6 +2,11 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
+project.ext {
+    rxJavaVersion = "2.1.0"
+    rxAndroidVersion = "2.0.1"
+}
+
 android {
     compileSdkVersion 24
     buildToolsVersion '25.0.0'
@@ -29,19 +34,20 @@ dependencies {
     testCompile 'junit:junit:4.12'
 
     compile 'com.android.support:appcompat-v7:24.2.1'
-    compile 'com.squareup.retrofit2:retrofit:2.1.0'
-    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
     compile 'com.android.support:design:24.2.1'
     compile 'com.android.support:cardview-v7:24.2.1'
 
-    compile 'io.reactivex:rxjava:1.1.6'
-    compile 'io.reactivex:rxandroid:1.2.1'
-    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
+    // Networking
+    compile 'com.squareup.retrofit2:retrofit:2.3.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.3.0'
+
+    // ReactiveX
+    compile "io.reactivex.rxjava2:rxjava:$project.rxJavaVersion"
+    compile "io.reactivex.rxjava2:rxandroid:$project.rxAndroidVersion"
 
     testCompile 'junit:junit:4.12'
-    // Optional -- Mockito framework
-    testCompile 'org.mockito:mockito-core:1.10.19'
-    compile 'com.google.guava:guava:20.0'
+    testCompile 'org.mockito:mockito-core:2.9.0'
+    compile 'com.google.guava:guava:22.0'
 
     compile project(':mvplibrary')
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"

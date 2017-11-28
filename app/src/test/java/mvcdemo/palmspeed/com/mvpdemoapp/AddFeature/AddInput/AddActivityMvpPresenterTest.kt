@@ -7,6 +7,7 @@ import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.verify
 import org.mockito.MockitoAnnotations
+import rx.Observable
 
 /**
  * Created by Prashant on 26-11-2017.
@@ -15,9 +16,6 @@ class AddActivityMvpPresenterTest {
 
   @Mock
   private val mAddActivityMvpView: AddActivityMvpContract.View? = null
-
-  @Mock
-  private val mAddActivityMvpViewRouter: AddActivityMvpContract.Router? = null
 
   @Mock
   private var mAddActivityMvpInteractor: AddActivityMvpContract.Interactor? = null
@@ -32,9 +30,11 @@ class AddActivityMvpPresenterTest {
 
     // Get a reference for Presenter
     mAddActivityMvpPresenter = AddActivityMvpPresenter()
+    mAddActivityMvpPresenter?.start()
+    mAddActivityMvpPresenter?.attachView(mAddActivityMvpView as AddActivityMvpContract.View)
 
     // Get the reference for Interactor
-    mAddActivityMvpInteractor = AddActivityMvpInteractor()
+    //mAddActivityMvpInteractor = AddActivityMvpInteractor()
   }
 
   @After
@@ -44,24 +44,20 @@ class AddActivityMvpPresenterTest {
   @Test
   fun additionTestSuccess() {
 
-    // Given
-    mAddActivityMvpPresenter?.start()
-    mAddActivityMvpPresenter?.attachView(mAddActivityMvpView as AddActivityMvpContract.View)
-    verify(mAddActivityMvpView)?.setRouterToPresenter()
-    verify(mAddActivityMvpView)?.init()
+    // Given0
     val firstNumber = "10"
     val secondNumber = "20"
+    val additionResult = "30"
 
     // When
-    mAddActivityMvpPresenter?.addTwoNumbers(firstNumber = firstNumber, secondNumber = secondNumber)
+    `when`(mAddActivityMvpInteractor?.addTwoNumbers(firstNumber, secondNumber))
+        .thenReturn(Observable.just(Integer.parseInt(additionResult)))
 
     // Then
+    mAddActivityMvpPresenter?.addTwoNumbers(firstNumber = firstNumber, secondNumber = secondNumber)
     verify(mAddActivityMvpView)?.displayProgress()
-    verify(mAddActivityMvpInteractor?.addTwoNumbers(firstNumber = firstNumber, secondNumber = secondNumber))
-    verify(mAddActivityMvpPresenter)?.calculatedAddition(30)
-    verify(mAddActivityMvpView)?.dismissProgress()
-    verify(mAddActivityMvpView)?.displayAddition(30)
-    verify(mAddActivityMvpViewRouter)?.goToSuccessPage("30")
+    verify(mAddActivityMvpView)?.displayAddition(Integer.parseInt(additionResult))
+    verify(mAddActivityMvpView)?.goToSuccessPage(additionResult)
 
   }
 }

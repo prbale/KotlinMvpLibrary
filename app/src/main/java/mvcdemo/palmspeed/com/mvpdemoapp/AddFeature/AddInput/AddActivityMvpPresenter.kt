@@ -1,54 +1,49 @@
 package mvcdemo.palmspeed.com.mvpdemoapp.AddFeature.AddInput
 
 import android.text.TextUtils
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import mvcdemo.palmspeed.com.mvpdemoapp.AddFeature.AddInput.AddActivityMvpContract.View
 import mvclib.palmspeed.com.mvplibrary.MvpBasePresenter
-import rx.android.schedulers.AndroidSchedulers
-import rx.schedulers.Schedulers
 
-class AddActivityMvpPresenter : MvpBasePresenter<AddActivityMvpContract.View>(), AddActivityMvpContract.Presenter, AddActivityMvpContract.Interactor.addActivityMvpInteractorCallback {
+class AddActivityMvpPresenter : MvpBasePresenter<AddActivityMvpContract.View>(), AddActivityMvpContract.Presenter {
 
   private var mAddActivityMvpInteractor: AddActivityMvpContract.Interactor = AddActivityMvpInteractor()
 
-  private var mRouter: AddActivityMvpContract.Router? = null
-
   override fun addTwoNumbers(firstNumber: String, secondNumber: String) {
 
-    getView()?.displayProgress()
-
     if (TextUtils.isEmpty(firstNumber) || TextUtils.isEmpty(secondNumber)) {
-      getView()?.displayError("Please enter valid value.")
-      getView()?.dismissProgress()
+      getView()?.apply {
+        displayError("Please enter valid value.")
+        dismissProgress()
+      }
       return
     }
 
-    mAddActivityMvpInteractor.addTwoNumbers(firstNumber, secondNumber)
-       .subscribeOn(Schedulers.newThread())
-       .observeOn(AndroidSchedulers.mainThread())
-       .subscribe(
+    addDisposable(mAddActivityMvpInteractor.addTwoNumbers(firstNumber, secondNumber)
+        .subscribeOn(Schedulers.newThread())
+        .observeOn(AndroidSchedulers.mainThread())
+        .doOnSubscribe {
+          getView()?.displayProgress()
+        }
+        .subscribe(
            { result -> calculatedAddition(result as Int) },
            { errorMessage -> displayError(errorMessage.toString()) },
            {}
-       )
+        ))
   }
 
-  override fun setRouter(router: AddActivityMvpContract.Router) {
-    mRouter = router
-  }
-
-  override fun calculatedAddition(res: Int) {
+  fun calculatedAddition(res: Int) {
       getView()?.dismissProgress()
-      getView()?.displayAddition(res)
-      mRouter?.goToSuccessPage(res.toString())
+      getView()?.goToSuccessPage(res.toString())
   }
 
-  override fun displayError(errMsg: String) {
+  fun displayError(errMsg: String) {
       getView()?.dismissProgress()
-      getView()?.displayError(errMsg)
+      getView()?.goToErrorPage(errMsg)
   }
 
   override fun start() {
-    getView()?.setRouterToPresenter()
     getView()?.init()
   }
 

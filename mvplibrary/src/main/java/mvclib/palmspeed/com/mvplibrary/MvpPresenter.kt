@@ -34,4 +34,6 @@ interface MvpPresenter<in V : MvpView> {
    */
   @UiThread
   fun detachView(retainInstance: Boolean)
+
+  fun stop()
 }

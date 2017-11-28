@@ -4,10 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/KotlinMvpLibrary.iml" filepath="$PROJECT_DIR$/.idea/KotlinMvpLibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://C:\Users\Prashant\Desktop\KotlinMvpLibrary\app\app.iml" filepath="C:\Users\Prashant\Desktop\KotlinMvpLibrary\app\app.iml" />
       <module fileurl="file://C:\Users\Prashant\Desktop\KotlinMvpLibrary\mvpdemo.iml" filepath="C:\Users\Prashant\Desktop\KotlinMvpLibrary\mvpdemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/mvplibrary/mvplibrary.iml" filepath="$PROJECT_DIR$/mvplibrary/mvplibrary.iml" />
-      <module fileurl="file://C:\Users\Prashant\Desktop\KotlinMvpLibrary\mvplibrary\mvplibrary.iml" filepath="C:\Users\Prashant\Desktop\KotlinMvpLibrary\mvplibrary\mvplibrary.iml" />
     </modules>
   </component>
 </project>

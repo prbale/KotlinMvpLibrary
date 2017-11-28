@@ -1,6 +1,8 @@
 package mvclib.palmspeed.com.mvplibrary
 
 import android.support.annotation.UiThread
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
 
 import java.lang.ref.WeakReference
 
@@ -21,6 +23,8 @@ open class MvpBasePresenter<V : MvpView> : MvpPresenter<V> {
    * change or any other situations.
    */
   private var weakViewRef: WeakReference<V>? = null
+
+  private val disposables = CompositeDisposable()
 
   @UiThread
   override fun attachView(view: V) {
@@ -56,7 +60,23 @@ open class MvpBasePresenter<V : MvpView> : MvpPresenter<V> {
   val isViewAttached: Boolean
     get() = weakViewRef != null && weakViewRef!!.get() != null
 
+  /**
+   * Contains common setup actions needed for all presenters, if any.
+   * Subclasses may override this.
+   */
   override fun start() {
+  }
+
+  /**
+   * Contains common cleanup actions needed for all presenters, if any.
+   * Subclasses may override this.
+   */
+  override fun stop() {
+    disposables.clear()
+  }
+
+  protected fun addDisposable(disposable: Disposable) {
+    disposables.add(disposable)
   }
 
 }
