@@ -4,10 +4,10 @@ import io.reactivex.Single
 import mvclib.palmspeed.com.mvplibrary.MvpPresenter
 import mvclib.palmspeed.com.mvplibrary.MvpView
 
-interface AddActivityMvpContract {
+interface AddActivityContract {
 
   interface View : MvpView {
-    fun displayError(errMsg: String)
+    fun displayError(errorMessage: String)
     fun displayProgress()
     fun dismissProgress()
     fun goToErrorPage(errorMessage: String)

@@ -2,7 +2,7 @@ package mvcdemo.palmspeed.com.mvpdemoapp.AddFeature.AddInput
 
 import io.reactivex.Single
 
-class AddActivityMvpInteractor : AddActivityMvpContract.Interactor {
+class AddActivityInteractor : AddActivityContract.Interactor {
 
   override fun addTwoNumbers(firstNumber: String, secondNumber: String): Single<Any> = try {
       val a = Integer.parseInt(firstNumber)

@@ -51,7 +51,6 @@ dependencies {
 
     testCompile 'junit:junit:4.12'
     testCompile 'org.mockito:mockito-core:2.9.0'
-    compile 'com.google.guava:guava:22.0'
 
     compile project(':mvplibrary')
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"

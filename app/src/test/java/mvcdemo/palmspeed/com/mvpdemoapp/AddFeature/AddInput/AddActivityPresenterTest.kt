@@ -12,15 +12,15 @@ import org.mockito.MockitoAnnotations
 /**
  * Created by Prashant on 26-11-2017.
  */
-class AddActivityMvpPresenterTest {
+class AddActivityPresenterTest {
 
   @Mock
-  private val mAddActivityMvpView: AddActivityMvpContract.View? = null
+  private val mAddActivityView: AddActivityContract.View? = null
 
   @Mock
-  private var mAddActivityMvpInteractor: AddActivityMvpContract.Interactor? = null
+  private var mAddActivityInteractor: AddActivityContract.Interactor? = null
 
-  private var mAddActivityMvpPresenter: AddActivityMvpPresenter? = null
+  private var mAddActivityMvpPresenter: AddActivityPresenter? = null
 
   @Before
   fun setUp() {
@@ -29,12 +29,12 @@ class AddActivityMvpPresenterTest {
     MockitoAnnotations.initMocks(this)
 
     // Get a reference for Presenter
-    mAddActivityMvpPresenter = AddActivityMvpPresenter()
+    mAddActivityMvpPresenter = AddActivityPresenter()
     mAddActivityMvpPresenter?.start()
-    mAddActivityMvpPresenter?.attachView(mAddActivityMvpView as AddActivityMvpContract.View)
+    mAddActivityMvpPresenter?.attachView(mAddActivityView as AddActivityContract.View)
 
     // Get the reference for Interactor
-    //mAddActivityMvpInteractor = AddActivityMvpInteractor()
+    //mAddActivityInteractor = AddActivityInteractor()
   }
 
   @After
@@ -50,13 +50,13 @@ class AddActivityMvpPresenterTest {
     val additionResult = "30"
 
     // When
-    `when`(mAddActivityMvpInteractor?.addTwoNumbers(firstNumber, secondNumber))
+    `when`(mAddActivityInteractor?.addTwoNumbers(firstNumber, secondNumber))
         .thenReturn(Single.just(Integer.parseInt(additionResult)))
 
     // Then
     mAddActivityMvpPresenter?.addTwoNumbers(firstNumber = firstNumber, secondNumber = secondNumber)
-    verify(mAddActivityMvpView)?.displayProgress()
-    verify(mAddActivityMvpView)?.goToSuccessPage(additionResult)
+    verify(mAddActivityView)?.displayProgress()
+    verify(mAddActivityView)?.goToSuccessPage(additionResult)
 
   }
 }

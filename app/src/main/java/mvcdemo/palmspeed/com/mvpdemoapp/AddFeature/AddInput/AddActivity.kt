@@ -16,11 +16,11 @@ import mvcdemo.palmspeed.com.mvpdemoapp.Extensions.setFullScreen
 import mvcdemo.palmspeed.com.mvpdemoapp.Extensions.showSnackBarLong
 import mvcdemo.palmspeed.com.mvpdemoapp.R
 
-class AddActivity : BaseActivity<AddActivityMvpContract.View, AddActivityMvpContract.Presenter>(), AddActivityMvpContract.View {
+class AddActivity : BaseActivity<AddActivityContract.View, AddActivityContract.Presenter>(), AddActivityContract.View {
 
-  override fun createPresenter(): AddActivityMvpContract.Presenter = AddActivityMvpPresenter()
+  override fun createPresenter(): AddActivityContract.Presenter = AddActivityPresenter()
 
-  override fun getViewRef(): AddActivityMvpContract.View = this
+  override fun getViewRef(): AddActivityContract.View = this
 
   override fun tag(): String = AddActivity::class.java.simpleName
 
@@ -62,8 +62,8 @@ class AddActivity : BaseActivity<AddActivityMvpContract.View, AddActivityMvpCont
     presenter.detachView(false)
   }
 
-  override fun displayError(errMsg: String) {
-    mainActivityRootLayout.showSnackBarLong(errMsg)
+  override fun displayError(errorMessage: String) {
+    mainActivityRootLayout.showSnackBarLong(errorMessage)
   }
 
   override fun displayProgress() = showLoading()

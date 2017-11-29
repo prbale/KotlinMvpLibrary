@@ -3,12 +3,12 @@ package mvcdemo.palmspeed.com.mvpdemoapp.AddFeature.AddInput
 import android.text.TextUtils
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import mvcdemo.palmspeed.com.mvpdemoapp.AddFeature.AddInput.AddActivityMvpContract.View
+import mvcdemo.palmspeed.com.mvpdemoapp.AddFeature.AddInput.AddActivityContract.View
 import mvclib.palmspeed.com.mvplibrary.MvpBasePresenter
 
-class AddActivityMvpPresenter : MvpBasePresenter<AddActivityMvpContract.View>(), AddActivityMvpContract.Presenter {
+class AddActivityPresenter : MvpBasePresenter<AddActivityContract.View>(), AddActivityContract.Presenter {
 
-  private var mAddActivityMvpInteractor: AddActivityMvpContract.Interactor = AddActivityMvpInteractor()
+  private var mAddActivityInteractor: AddActivityContract.Interactor = AddActivityInteractor()
 
   override fun addTwoNumbers(firstNumber: String, secondNumber: String) {
 
@@ -20,7 +20,7 @@ class AddActivityMvpPresenter : MvpBasePresenter<AddActivityMvpContract.View>(),
       return
     }
 
-    addDisposable(mAddActivityMvpInteractor.addTwoNumbers(firstNumber, secondNumber)
+    addDisposable(mAddActivityInteractor.addTwoNumbers(firstNumber, secondNumber)
         .subscribeOn(Schedulers.newThread())
         .observeOn(AndroidSchedulers.mainThread())
         .doOnSubscribe {
