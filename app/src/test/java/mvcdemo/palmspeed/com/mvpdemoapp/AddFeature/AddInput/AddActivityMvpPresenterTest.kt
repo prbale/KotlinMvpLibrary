@@ -1,5 +1,6 @@
 package mvcdemo.palmspeed.com.mvpdemoapp.AddFeature.AddInput
 
+import io.reactivex.Single
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -7,7 +8,6 @@ import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.verify
 import org.mockito.MockitoAnnotations
-import rx.Observable
 
 /**
  * Created by Prashant on 26-11-2017.
@@ -51,12 +51,11 @@ class AddActivityMvpPresenterTest {
 
     // When
     `when`(mAddActivityMvpInteractor?.addTwoNumbers(firstNumber, secondNumber))
-        .thenReturn(Observable.just(Integer.parseInt(additionResult)))
+        .thenReturn(Single.just(Integer.parseInt(additionResult)))
 
     // Then
     mAddActivityMvpPresenter?.addTwoNumbers(firstNumber = firstNumber, secondNumber = secondNumber)
     verify(mAddActivityMvpView)?.displayProgress()
-    verify(mAddActivityMvpView)?.displayAddition(Integer.parseInt(additionResult))
     verify(mAddActivityMvpView)?.goToSuccessPage(additionResult)
 
   }

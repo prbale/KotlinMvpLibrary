@@ -1,6 +1,6 @@
 package mvcdemo.palmspeed.com.mvpdemoapp.AddFeature.AddInput
 
-import io.reactivex.Observable
+import io.reactivex.Single
 import mvclib.palmspeed.com.mvplibrary.MvpPresenter
 import mvclib.palmspeed.com.mvplibrary.MvpView
 
@@ -20,6 +20,6 @@ interface AddActivityMvpContract {
   }
 
   interface Interactor {
-    fun addTwoNumbers(firstNumber: String, secondNumber: String) : Observable<Any>
+    fun addTwoNumbers(firstNumber: String, secondNumber: String) : Single<Any>
   }
 }

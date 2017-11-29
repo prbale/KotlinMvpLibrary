@@ -28,8 +28,7 @@ class AddActivityMvpPresenter : MvpBasePresenter<AddActivityMvpContract.View>(),
         }
         .subscribe(
            { result -> calculatedAddition(result as Int) },
-           { errorMessage -> displayError(errorMessage.toString()) },
-           {}
+           { errorMessage -> displayError(errorMessage.toString()) }
         ))
   }
 
