@@ -28,7 +28,7 @@ class AddActivityMvpPresenter : MvpBasePresenter<AddActivityMvpContract.View>(),
         }
         .subscribe(
            { result -> calculatedAddition(result as Int) },
-           { errorMessage -> displayError(errorMessage.toString()) }
+           { errorMessage -> handleError(errorMessage.toString()) }
         ))
   }
 
@@ -39,7 +39,7 @@ class AddActivityMvpPresenter : MvpBasePresenter<AddActivityMvpContract.View>(),
     }
   }
 
-  fun displayError(errMsg: String) {
+  fun handleError(errMsg: String) {
       getView()?.apply {
         dismissProgress()
         goToErrorPage(errMsg)
