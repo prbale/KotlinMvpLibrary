@@ -33,13 +33,17 @@ class AddActivityMvpPresenter : MvpBasePresenter<AddActivityMvpContract.View>(),
   }
 
   fun calculatedAddition(res: Int) {
-      getView()?.dismissProgress()
-      getView()?.goToSuccessPage(res.toString())
+    getView()?.apply {
+      dismissProgress()
+      goToSuccessPage(res.toString())
+    }
   }
 
   fun displayError(errMsg: String) {
-      getView()?.dismissProgress()
-      getView()?.goToErrorPage(errMsg)
+      getView()?.apply {
+        dismissProgress()
+        goToErrorPage(errMsg)
+      }
   }
 
   override fun start() {
