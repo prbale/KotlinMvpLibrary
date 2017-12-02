@@ -44,7 +44,7 @@ class AddActivityPresenterTest {
   @Test
   fun additionTestSuccess() {
 
-    // Given0
+    // Given
     val firstNumber = "10"
     val secondNumber = "20"
     val additionResult = "30"
