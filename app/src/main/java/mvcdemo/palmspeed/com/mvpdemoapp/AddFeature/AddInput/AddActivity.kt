@@ -78,6 +78,6 @@ class AddActivity : BaseActivity<AddActivityContract.View, AddActivityContract.P
   }
 
   override fun goToSuccessPage(result: String) {
-    startActivity(AddResultActivity.newIntent(this, result))
+   startActivity(AddResultActivity.newIntent(this, result))
   }
 }

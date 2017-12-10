@@ -12,7 +12,8 @@ class AddResultActivity : AppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_result)
-    val result = intent.getStringExtra(ADDITION_RESULT)
+    val result = intent.getStringExtra(ADDITION_RESULT) ?:
+        throw IllegalStateException("field $ADDITION_RESULT missing in Intent")
     textView1?.text = result
   }
 
