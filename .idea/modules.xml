@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/KotlinMvpLibrary.iml" filepath="$PROJECT_DIR$/.idea/KotlinMvpLibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/KotlinMvpApp.iml" filepath="$PROJECT_DIR$/KotlinMvpApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://C:\Users\Prashant\Desktop\KotlinMvpLibrary\mvpdemo.iml" filepath="C:\Users\Prashant\Desktop\KotlinMvpLibrary\mvpdemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/mvplibrary/mvplibrary.iml" filepath="$PROJECT_DIR$/mvplibrary/mvplibrary.iml" />
     </modules>
   </component>
