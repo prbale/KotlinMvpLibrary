@@ -6,5 +6,6 @@
   <string name="app_google_play_store_link">"https://play.google.com/store/apps/details?id="</string>
   <string name="app_market_link">"market://details?id="</string>
   <string name="about_screen_label">About screen</string>
+  <string name="error_msg_invalid_values">Please enter valid values.</string>
 
 </resources>

@@ -15,6 +15,7 @@ import mvcdemo.palmspeed.com.mvpdemoapp.Extensions.hideKeyboard
 import mvcdemo.palmspeed.com.mvpdemoapp.Extensions.setFullScreen
 import mvcdemo.palmspeed.com.mvpdemoapp.Extensions.showSnackBarLong
 import mvcdemo.palmspeed.com.mvpdemoapp.R
+import mvcdemo.palmspeed.com.mvpdemoapp.R.string
 
 class AddActivity : BaseActivity<AddActivityContract.View, AddActivityContract.Presenter>(), AddActivityContract.View {
 
@@ -62,22 +63,20 @@ class AddActivity : BaseActivity<AddActivityContract.View, AddActivityContract.P
     presenter.detachView(false)
   }
 
-  override fun displayError(errorMessage: String) {
-    mainActivityRootLayout.showSnackBarLong(errorMessage)
-  }
+  override fun displayError(errorMessage: String) =
+      mainActivityRootLayout.showSnackBarLong(errorMessage)
+
+  override fun displayInvalidInputError() =
+      mainActivityRootLayout.showSnackBarLong(getString(string.error_msg_invalid_values))
 
   override fun displayProgress() = showLoading()
 
   override fun dismissProgress() = hideLoading()
 
-  override fun goToErrorPage(errorMessage: String) {
-    val intent = Intent(this, ErrorActivity::class.java).apply {
-      putExtra("ERROR_MSG", errorMessage)
-    }
-    startActivity(intent)
-  }
+  override fun goToErrorPage(errorMessage: String) =
+      startActivity(ErrorActivity.newIntent(this, errorMessage))
 
-  override fun goToSuccessPage(result: String) {
-   startActivity(AddResultActivity.newIntent(this, result))
-  }
+  override fun goToSuccessPage(result: String) =
+    startActivity(AddResultActivity.newIntent(this, result))
+
 }

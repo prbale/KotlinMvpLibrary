@@ -8,6 +8,7 @@ interface AddActivityContract {
 
   interface View : MvpView {
     fun displayError(errorMessage: String)
+    fun displayInvalidInputError()
     fun displayProgress()
     fun dismissProgress()
     fun goToErrorPage(errorMessage: String)

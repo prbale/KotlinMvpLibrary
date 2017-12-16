@@ -14,7 +14,7 @@ class AddActivityPresenter : MvpBasePresenter<AddActivityContract.View>(), AddAc
 
     if (TextUtils.isEmpty(firstNumber) || TextUtils.isEmpty(secondNumber)) {
       getView()?.apply {
-        displayError("Please enter valid value.")
+        displayInvalidInputError()
         dismissProgress()
       }
       return
